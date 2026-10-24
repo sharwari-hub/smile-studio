@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smile Studio Dental | Gentle, modern dental care</title>
+<meta name="description" content="Sample website design for a dental clinic: root canal, implants, cosmetic dentistry and more. Placeholder content.">
+<meta name="theme-color" content="#FBFCFC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
+<!--
+  SMILE STUDIO DENTAL — sample design (fictional clinic).
+  BEFORE GOING LIVE FOR A REAL CLIENT, replace every [BRACKETED PLACEHOLDER]:
+  clinic name, doctor names/qualifications/registration numbers, phone, WhatsApp number
+  (search "91XXXXXXXXXX"), address, hours, email, map embed, photos.
+  The booking form is Netlify-Forms ready (data-netlify="true"); enable form detection in Netlify.
+  Check your local medical-advertising rules before adding testimonials or before/after photos.
+-->
+<style>
+:root{
+  --ink:#0B1F2A;
+  --muted:#4B5F66;
+  --bg:#FBFCFC;
+  --soft:#F0F6F6;
+  --line:#D9E5E5;
+  --teal:#0B7A75;
+  --teal-dark:#075B57;
+  --teal-tint:#D7EFED;
+  --radius:20px;
+  --header:68px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Sora','Inter',sans-serif;margin:0;letter-spacing:-0.02em}
+p{margin:0}
+a{color:var(--teal)}
+img,svg{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+section[id]{scroll-margin-top:calc(var(--header) + 8px)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:999px;font:600 15px 'Inter',sans-serif;text-decoration:none;border:1.5px solid var(--teal);cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark);color:#fff;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--teal-dark)}
+.btn-ghost:hover{background:var(--teal-tint);color:var(--teal-dark)}
+:focus-visible{outline:3px solid #7FD6CF;outline-offset:3px}
+
+/* ---------- ECG line (fixed, becomes the header underline) ---------- */
+.ecg{position:fixed;left:0;top:0;width:100%;height:100vh;z-index:60;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)}
+.ecg path{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Header ---------- */
+.site-header{position:fixed;top:0;left:0;right:0;height:var(--header);z-index:50;background:rgba(251,252,252,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.js .site-header{opacity:0;transform:translateY(-12px);pointer-events:none}
+.site-header .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 18px 'Sora',sans-serif;letter-spacing:-.01em}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center}
+.nav{display:flex;align-items:center;gap:28px;font-size:15px;font-weight:500}
+.nav a{color:var(--ink);text-decoration:none}
+.nav a:hover{color:var(--teal)}
+.nav .btn{min-height:42px;padding:0 20px;color:#fff}
+.nav .btn:hover{color:#fff}
+@media (max-width:900px){.nav a:not(.btn){display:none}}
+
+/* ---------- Scroll intro ---------- */
+.intro{height:360vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg)}
+.pre-brand{position:absolute;top:28px;left:0;right:0;text-align:center;font:600 13px 'Sora',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.steth{position:absolute;left:50%;top:50%;height:min(68vh,128vw);aspect-ratio:440/600;transform:translate(-50%,-50%);overflow:visible}
+.steth .tube{fill:none;stroke-linecap:round;stroke-width:9;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.7s cubic-bezier(.6,.1,.2,1) forwards}
+.steth .t1{stroke:var(--ink);animation-delay:.15s}
+.steth .t2{stroke:var(--ink);animation-delay:.15s}
+.steth .t3{stroke:var(--teal);animation-delay:1s}
+.steth .part{opacity:0;animation:pop .7s ease forwards}
+.steth .ear{animation-delay:.1s}
+.steth .junction{animation-delay:1s}
+.steth .chest{animation-delay:2.1s;transform-box:fill-box;transform-origin:center}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.steth .ring{fill:none;stroke:var(--teal);stroke-width:3;opacity:0;transform-box:fill-box;transform-origin:center}
+.hero-copy{position:absolute;inset:var(--header) 0 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px 6vh;gap:22px}
+.hero-copy h1{font-size:clamp(40px,8vw,96px);line-height:1.02;font-weight:700;letter-spacing:-.035em}
+.hero-copy h1 span{display:block}
+.hero-copy h1 .l2{color:var(--teal)}
+.hero-copy .sub{max-width:560px;font-size:clamp(16px,2vw,19px);color:var(--muted)}
+.hero-copy .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cue{position:absolute;bottom:4.5vh;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cue i{width:1.5px;height:28px;background:linear-gradient(var(--teal),transparent);animation:cue 1.6s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
+.js .hero-copy .l1,.js .hero-copy .l2,.js .hero-copy .sub,.js .hero-copy .cta{opacity:0}
+html:not(.js) .intro{height:auto}
+html:not(.js) .stage{position:relative;min-height:100vh}
+html:not(.js) .steth{display:none}
+html:not(.js) .site-header{opacity:1}
+.reduce .intro{height:100vh}
+
+/* ---------- Sections ---------- */
+.section{padding:112px 0}
+.section-head{display:flex;flex-direction:column;gap:14px;max-width:640px;margin-bottom:56px}
+.section-head h2{font-size:clamp(30px,4.4vw,48px);line-height:1.1;font-weight:700}
+.section-head p{font-size:18px;color:var(--muted)}
+
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;background:#fff;display:flex;flex-direction:column;gap:12px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);border-color:#9CCBC7;box-shadow:0 18px 40px -22px rgba(11,31,42,.35)}
+.card .num{font:600 14px 'Sora',sans-serif;color:var(--teal)}
+.card h3{font-size:21px;font-weight:600}
+.card p{font-size:15px;color:var(--muted)}
+
+.approach{background:var(--soft)}
+.approach-grid{display:flex;flex-wrap:wrap;gap:40px}
+.approach-grid>div{flex:1 1 260px;display:flex;flex-direction:column;gap:12px;border-top:2px solid var(--teal);padding-top:22px}
+.approach-grid h3{font-size:22px;font-weight:600}
+.approach-grid p{color:var(--muted)}
+
+.doctors{background:var(--ink);color:#fff}
+.doctors .eyebrow{color:#7FD6CF}
+.doctors .section-head p{color:#B7CBCF}
+.doc-row{display:flex;flex-wrap:wrap;gap:28px}
+.doc{flex:1 1 380px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;border:1px solid #223C48;border-radius:var(--radius);padding:24px;background:#0F2833}
+.doc .photo{flex:0 0 160px;width:160px;aspect-ratio:4/5;border-radius:14px;background:linear-gradient(160deg,#1B4349,#143039);border:1px solid #2B5A60;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;color:#9FC2C0;padding:10px}
+.doc .info{flex:1 1 200px;display:flex;flex-direction:column;gap:6px}
+.doc h3{font-size:22px;font-weight:600}
+.doc .role{color:#7FD6CF;font-weight:500;font-size:15px}
+.doc .meta{color:#B7CBCF;font-size:14px}
+
+.steps{display:flex;flex-wrap:wrap;gap:32px}
+.step{flex:1 1 260px;display:flex;flex-direction:column;gap:10px}
+.step .big{font:700 64px/1 'Sora',sans-serif;color:var(--teal-tint);-webkit-text-stroke:1.5px var(--teal);color:transparent}
+.step h3{font-size:22px;font-weight:600}
+.step p{color:var(--muted)}
+
+.faq-wrap{background:var(--soft)}
+.faq{max-width:820px;display:flex;flex-direction:column;gap:12px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 24px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font:600 17px 'Sora',sans-serif;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:26px;font-weight:500;color:var(--teal);line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 0 22px;color:var(--muted)}
+
+.contact-grid{display:flex;flex-wrap:wrap;gap:48px}
+.contact-info{flex:1 1 340px;display:flex;flex-direction:column;gap:26px}
+.info-item{display:flex;flex-direction:column;gap:2px}
+.info-item b{font:600 15px 'Sora',sans-serif}
+.info-item span{color:var(--muted)}
+.map{width:100%;aspect-ratio:16/10;border-radius:var(--radius);background:var(--soft);border:1px dashed #9CCBC7;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;text-align:center;padding:16px}
+form.booking{flex:1 1 440px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 60px -40px rgba(11,31,42,.4)}
+.booking h3{font-size:24px;font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:18px}
+.field{flex:1 1 200px;display:flex;flex-direction:column;gap:6px}
+.field label{font-size:14px;font-weight:600}
+.field input,.field select,.field textarea{font:inherit;color:var(--ink);padding:13px 14px;min-height:48px;border:1px solid #A9C4C1;border-radius:12px;background:#fff;width:100%}
+.field textarea{resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);outline:3px solid #BFE6E2;outline-offset:0}
+.note{font-size:13px;color:var(--muted)}
+.hidden{display:none}
+
+footer{background:var(--ink);color:#B7CBCF;font-size:14px;padding:40px 0}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+footer b{color:#fff;font-family:'Sora',sans-serif}
+
+.wa{position:fixed;right:20px;bottom:20px;z-index:55;width:56px;height:56px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(11,31,42,.55);transition:transform .2s}
+.wa:hover{transform:scale(1.07)}
+
+/* ---------- Reveal on scroll ---------- */
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.js .reveal.in{opacity:1;transform:none}
+.reduce .reveal,.reduce .card{transition:none}
+@media (prefers-reduced-motion:reduce){
+  .steth .tube,.steth .part,.cue i{animation:none!important;stroke-dashoffset:0;opacity:1}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SCROLL INTRO ============ -->
+<section id="intro" class="intro" aria-label="Introduction">
+  <div class="stage">
+    <div class="pre-brand" id="preBrand">Smile Studio Dental</div>
+
+    <svg id="steth" class="steth" viewBox="380 40 440 600" aria-hidden="true">
+      <!-- ear tubes -->
+      <path class="tube t1" pathLength="1" d="M470 96 C470 215 560 250 600 330"/>
+      <path class="tube t2" pathLength="1" d="M730 96 C730 215 640 250 600 330"/>
+      <!-- earpieces -->
+      <circle class="part ear" cx="470" cy="84" r="11" fill="#0B1F2A"/>
+      <circle class="part ear" cx="730" cy="84" r="11" fill="#0B1F2A"/>
+      <!-- junction -->
+      <circle class="part junction" cx="600" cy="334" r="13" fill="#0B1F2A"/>
+      <!-- main tube -->
+      <path class="tube t3" pathLength="1" d="M600 342 C600 390 690 400 690 450 C690 500 600 470 600 520"/>
+      <!-- chest piece -->
+      <g class="part chest">
+        <circle id="ring" class="ring" cx="600" cy="560" r="40"/>
+        <circle cx="600" cy="560" r="40" fill="#FFFFFF" stroke="#0B1F2A" stroke-width="8"/>
+        <circle id="diaphragm" cx="600" cy="560" r="24" fill="#D7EFED" stroke="#0B7A75" stroke-width="3" style="transform-box:fill-box;transform-origin:center"/>
+      </g>
+    </svg>
+
+    <div class="hero-copy">
+      <h1><span class="l1" id="l1">Listen closely.</span><span class="l2" id="l2">Smile confidently.</span></h1>
+      <p class="sub" id="heroSub">Gentle, unhurried dental care with clear plans, honest advice and a calm clinic. From check-ups to implants and smile makeovers.</p>
+      <div class="cta" id="heroCta">
+        <a class="btn btn-primary" href="#book">Book a visit</a>
+        <a class="btn btn-ghost" href="#services">Explore treatments</a>
+      </div>
+    </div>
+
+    <div class="cue" id="cue" aria-hidden="true"><span>Scroll to listen</span><i></i></div>
+  </div>
+</section>
+
+<!-- Heartbeat line: fixed, ends as the header underline -->
+<svg id="ecg" class="ecg" aria-hidden="true"><path id="ecgPath" d=""/></svg>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a class="brand" href="#intro" aria-label="Smile Studio Dental, home">
+      <span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+      Smile Studio
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Treatments</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#visit">Your visit</a>
+      <a href="#faq">FAQ</a>
+      <a href="#book">Contact</a>
+      <a class="btn btn-primary" href="#book">Book a visit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ TREATMENTS ============ -->
+<section id="services" class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Treatments</span>
+      <h2>Everything for a healthy, confident smile.</h2>
+      <p>From routine care to complete smile design, all under one roof.</p>
+    </div>
+    <div class="services">
+      <article class="card reveal"><span class="num">01</span><h3>Root canal treatment</h3><p>Gentle, step-by-step treatment to save a painful or infected tooth, with the plan explained before we begin.</p></article>
+      <article class="card reveal"><span class="num">02</span><h3>Dental implants</h3><p>Fixed, natural-looking replacements for missing teeth, planned around your bite and jaw.</p></article>
+      <article class="card reveal"><span class="num">03</span><h3>Extractions &amp; wisdom teeth</h3><p>Careful removal of damaged or impacted teeth with clear aftercare instructions.</p></article>
+      <article class="card reveal"><span class="num">04</span><h3>Cosmetic dentistry</h3><p>Teeth whitening, veneers, bonding and smile design for a look that still feels like you.</p></article>
+      <article class="card reveal"><span class="num">05</span><h3>Braces &amp; clear aligners</h3><p>Straighter teeth for teens and adults, with options to suit your lifestyle.</p></article>
+      <article class="card reveal"><span class="num">06</span><h3>Crowns &amp; bridges</h3><p>Durable, well-fitted restorations that protect weak teeth and fill gaps.</p></article>
+      <article class="card reveal"><span class="num">07</span><h3>Cleaning &amp; gum care</h3><p>Scaling, polishing and gum treatment to keep problems from starting.</p></article>
+      <article class="card reveal"><span class="num">08</span><h3>Children's dentistry</h3><p>Friendly check-ups, sealants and fluoride care that help kids feel at ease.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPROACH ============ -->
+<section class="section approach">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our approach</span>
+      <h2>Care that starts with listening.</h2>
+    </div>
+    <div class="approach-grid">
+      <div class="reveal"><h3>Clear plans, no surprises</h3><p>You see the diagnosis, the options and the cost before any treatment starts.</p></div>
+      <div class="reveal"><h3>Careful sterilisation</h3><p>Instruments are sterilised and single-use items are used wherever they should be.</p></div>
+      <div class="reveal"><h3>Respect for your time</h3><p>Appointments are scheduled to keep waiting short, and reminders are sent in advance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCTORS ============ -->
+<section id="doctors" class="section doctors">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Meet the doctors</span>
+      <h2>Two specialists, one calm clinic.</h2>
+      <p>Replace these sample profiles with the clinic's real doctors, qualifications and registration numbers.</p>
+    </div>
+    <div class="doc-row">
+      <article class="doc reveal">
+        <div class="photo">[DOCTOR PHOTO]</div>
+        <div class="info">
+          <h3>Dr. Anand Deshmukh</h3>
+          <span class="role">Implants &amp; smile design</span>
+          <span class="meta">BDS, MDS (Prosthodontics)<br>[YEARS] years of practice · Reg. no. [NUMBER]</span>
+        </div>
+      </article>
+      <article class="doc reveal">
+        <div class="photo">[DOCTOR PHOTO]</div>
+        <div class="info">
+          <h3>Dr. Priya Joshi</h3>
+          <span class="role">Root canal &amp; restorative care</span>
+          <span class="meta">BDS, MDS (Conservative Dentistry &amp; Endodontics)<br>[YEARS] years of practice · Reg. no. [NUMBER]</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ YOUR VISIT ============ -->
+<section id="visit" class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Your visit</span>
+      <h2>Simple from start to finish.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="big">1</span><h3>Book a slot</h3><p>Use the form below, call, or message us on WhatsApp. We confirm your time.</p></div>
+      <div class="step reveal"><span class="big">2</span><h3>Consultation &amp; plan</h3><p>An examination, any needed X-rays and a plain-language treatment plan with costs.</p></div>
+      <div class="step reveal"><span class="big">3</span><h3>Treatment &amp; follow-up</h3><p>Comfortable treatment, written aftercare and a reminder for your next check-up.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="section faq-wrap">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions</span>
+      <h2>Good to know before you visit.</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Is a root canal painful?</summary><p>With local anaesthesia, most patients are comfortable during treatment. Your dentist will explain what to expect and how to manage any soreness afterwards.</p></details>
+      <details><summary>How often should I get a check-up?</summary><p>Usually every six months. Your dentist may suggest a different schedule based on your gum and tooth health.</p></details>
+      <details><summary>Do you treat children?</summary><p>Yes. We see children for check-ups, cleaning and preventive care, and we take time to help them feel at ease.</p></details>
+      <details><summary>What should I do in a dental emergency?</summary><p>Call the clinic on [PHONE NUMBER] as soon as you can. For severe swelling, heavy bleeding or injury to the face, go to the nearest hospital.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOK / CONTACT ============ -->
+<section id="book" class="section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-head" style="margin-bottom:0">
+          <span class="eyebrow">Book a visit</span>
+          <h2>Let's find a time that suits you.</h2>
+          <p>Send a request and we'll confirm by phone or message.</p>
+        </div>
+        <div class="info-item"><b>Address</b><span>[CLINIC ADDRESS], [AREA], [CITY]</span></div>
+        <div class="info-item"><b>Hours</b><span>[DAYS] · [OPENING HOURS]</span></div>
+        <div class="info-item"><b>Phone &amp; WhatsApp</b><span>[PHONE NUMBER]</span></div>
+        <div class="info-item"><b>Email</b><span>[EMAIL ADDRESS]</span></div>
+        <!-- Replace this box with a Google Maps embed iframe -->
+        <div class="map">[GOOGLE MAP EMBED]</div>
+      </div>
+
+      <form class="booking reveal" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <h3>Request an appointment</h3>
+        <input type="hidden" name="form-name" value="booking">
+        <p class="hidden"><label>Leave this empty: <input name="bot-field"></label></p>
+        <div class="row">
+          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="f-date">Preferred date</label><input id="f-date" name="date" type="date"></div>
+          <div class="field"><label for="f-treat">Treatment</label>
+            <select id="f-treat" name="treatment">
+              <option>General check-up</option>
+              <option>Root canal treatment</option>
+              <option>Dental implants</option>
+              <option>Extraction / wisdom tooth</option>
+              <option>Cosmetic dentistry</option>
+              <option>Braces / aligners</option>
+              <option>Children's dentistry</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="f-msg">Anything we should know? (optional)</label><textarea id="f-msg" name="message" rows="3"></textarea></div>
+        <button class="btn btn-primary" type="submit">Request appointment</button>
+        <p class="note">For emergencies, call the clinic directly instead of using this form.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Smile Studio Dental</b><br>[CLINIC ADDRESS] · [PHONE NUMBER] · [EMAIL ADDRESS]</div>
+    <div>© 2026 Smile Studio Dental · Design preview with sample content</div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/91XXXXXXXXXX" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.7-5.2A8.5 8.5 0 1 1 21 12z"/><path d="M9 9.5c.2 2.2 2.300 4.300 4.500 4.500l1.200-1.200-1.800-1-.8.6a3.500 3.500 0 0 1-1.500-1.500l.6-.8-1-1.800z" fill="#fff" stroke="none"/></svg>
+</a>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) root.classList.add('reduce');
+
+  var intro=document.getElementById('intro');
+  var steth=document.getElementById('steth');
+  var ecg=document.getElementById('ecg');
+  var ecgPath=document.getElementById('ecgPath');
+  var ring=document.getElementById('ring');
+  var diaphragm=document.getElementById('diaphragm');
+  var header=document.getElementById('siteHeader');
+  var preBrand=document.getElementById('preBrand');
+  var cue=document.getElementById('cue');
+  var l1=document.getElementById('l1'), l2=document.getElementById('l2');
+  var sub=document.getElementById('heroSub'), cta=document.getElementById('heroCta');
+
+  var T=320, SPEED=290, HEADER_Y=68;
+  var W=0,H=0,cx=0,baseY0=0,p=0,running=false,lastBeat=-1,start=performance.now();
+
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function ease(t){return t*t*(3-2*t);}
+  function seg(v,a,b){return clamp((v-a)/(b-a),0,1);}
+  function g(x,m,s){var d=x-m;return Math.exp(-(d*d)/(2*s*s));}
+  function wave(ph){
+    return 0.12*g(ph,0.15,0.025) - 0.14*g(ph,0.32,0.006) + 1.0*g(ph,0.36,0.007) - 0.28*g(ph,0.40,0.007) + 0.2*g(ph,0.58,0.04);
+  }
+
+  function layout(){
+    W=ecg.clientWidth; H=ecg.clientHeight; cx=W/2;
+    ecg.setAttribute('viewBox','0 0 '+W+' '+H);
+    var h=steth.offsetHeight;
+    // chest piece bottom edge (y=600 in a viewBox starting at y=40, height 600)
+    baseY0=H*0.5-h/2+((600-40)/600)*h;
+  }
+
+  function progress(){
+    if(reduce) return 1;
+    var total=intro.offsetHeight-window.innerHeight;
+    if(total<=0) return 1;
+    return clamp(-intro.getBoundingClientRect().top/total,0,1);
+  }
+
+  function reveal(el,a,b,rise){
+    var v=ease(seg(p,a,b));
+    el.style.opacity=v;
+    el.style.transform='translateY('+((1-v)*(rise||28))+'px)';
+    return v;
+  }
+
+  function pulse(){
+    if(!ring.animate) return;
+    ring.animate([{opacity:.6,transform:'scale(1)'},{opacity:0,transform:'scale(1.9)'}],{duration:950,easing:'ease-out'});
+    diaphragm.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:380,easing:'ease-out'});
+  }
+
+  function render(t){
+    var age=(t-start)/1000;
+    var introRamp=ease(clamp(age/1.6,0,1));
+    var move=ease(seg(p,0.35,0.7));
+    var baseY=baseY0+(HEADER_Y-baseY0)*move;
+    var amp=(1-move)*introRamp;
+    var ampPx=Math.min(H*0.16,130)*amp;
+    var off=age*SPEED;
+    var d='';
+    for(var x=0;x<=W;x+=3){
+      var ph=(((x+off)/T)%1+1)%1;
+      var y=baseY-ampPx*wave(ph);
+      d+=(x===0?'M':'L')+x+' '+y.toFixed(1);
+    }
+    ecgPath.setAttribute('d',d);
+
+    // heartbeat touching the chest piece
+    if(p<0.45 && introRamp>0.9){
+      var beat=Math.floor((cx+off)/T-0.36+1);
+      if(beat!==lastBeat){ if(lastBeat!==-1) pulse(); lastBeat=beat; }
+    }
+
+    // stethoscope fades and drifts away
+    var sp=ease(seg(p,0.12,0.45));
+    steth.style.opacity=1-ease(seg(p,0.15,0.45));
+    steth.style.transform='translate(-50%,calc(-50% - '+(sp*8)+'vh)) scale('+(1-sp*0.16)+')';
+    preBrand.style.opacity=1-ease(seg(p,0.1,0.3));
+    cue.style.opacity=1-ease(seg(p,0.02,0.12));
+
+    // headline, copy, header
+    reveal(l1,0.55,0.7,34);
+    reveal(l2,0.62,0.77,34);
+    reveal(sub,0.74,0.88,22);
+    var c=reveal(cta,0.8,0.94,22);
+    cta.style.pointerEvents=c>0.5?'auto':'none';
+    var hv=ease(seg(p,0.62,0.8));
+    header.style.opacity=hv;
+    header.style.transform='translateY('+((1-hv)*-12)+'px)';
+    header.style.pointerEvents=hv>0.6?'auto':'none';
+  }
+
+  function frame(t){
+    p=progress();
+    render(t);
+    if(p<0.995||(t-start)<2000){ requestAnimationFrame(frame); } else { running=false; }
+  }
+  function kick(){ if(!running){ running=true; requestAnimationFrame(frame); } }
+
+  layout();
+  p=progress();
+  if(reduce){ steth.style.opacity=0; start=performance.now()-5000; render(performance.now()); }
+  else { kick(); }
+  window.addEventListener('scroll',kick,{passive:true});
+  window.addEventListener('resize',function(){layout();kick();});
+  window.addEventListener('load',function(){layout();kick();});
+
+  // reveal on scroll
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el,i){ el.style.transitionDelay=((i%4)*70)+'ms'; io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // booking form: no past dates
+  var dt=document.getElementById('f-date');
+  if(dt){ var n=new Date(); dt.min=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0'); }
+})();
+</script>
+</body>
+</html>
